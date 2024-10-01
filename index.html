@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Cursor Workshop Learning</title>
+  <style>
+
+
+        #cursor-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .ball {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 0, 255, 1) 0%, rgba(255, 255, 255, 0) 70%);
+            box-shadow: 0px 0px 10px rgba(255, 0, 255, 0.7);
+            opacity: 0;
+            transition: opacity 0.2s ease-out;
+        }
+
+        #ball1 {
+            width: 24px;
+            height: 24px;
+            box-shadow: 0px 0px 15px rgba(255, 0, 255, 0.9);
+        }
+
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+    }
+
+    .navbar a {
+      color: #ff69b4;
+      margin: 0 20px;
+      text-decoration: none;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    /* 3D Slide Styling */
+    .slide {
+      width: 1154px;
+      height: 900px;
+      margin: 150px auto;
+      background: linear-gradient(145deg, #000000, #1a1a1a); /* Black gradient background */
+      border-radius: 40px;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.5); /* White glowing corners */
+      transition: transform 0.5s ease, background 0.5s, box-shadow 0.5s ease;
+      perspective: 1000px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid rgba(255, 255, 255, 0.1); /* Subtle border for contrast */
+    }
+
+
+
+    .content {
+      text-align: center;
+      padding: 50px;
+      color: #fff;
+    }
+
+    .content h1 {
+      font-size: 48px;
+      font-weight: bold;
+      color: #ff69b4;
+      text-shadow: 0 0 10px #ff69b4;
+    }
+
+    .content p {
+      font-size: 22px;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 800px;
+      margin: 20px auto;
+    }
+
+    /* PayPal Button Styling */
+    .pay-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #ff69b4;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 30px;
+      box-shadow: 0 0 15px #ff69b4;
+      transition: 0.3s;
+      font-size: 18px;
+    }
+
+    .pay-btn:hover {
+      background-color: #ff1493;
+      box-shadow: 0 0 25px #ff69b4;
+    }
+
+    /* Footer Styling */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+    <div id="cursor-container">
+        <div class="ball" id="ball1"></div>
+        <div class="ball" id="ball2"></div>
+        <div class="ball" id="ball3"></div>
+        <div class="ball" id="ball4"></div>
+        <div class="ball" id="ball5"></div>
+    </div>
+
+  <!-- 3D Slide for Workshop -->
+  <div class="slide">
+    <div class="content">
+      <h1>3D Cursor Workshop Learning</h1>
+      <p>Join our interactive 3D cursor workshop and learn to build cutting-edge web designs with mouse interactions and visual effects. Transform your projects with next-level skills.</p>
+      <a href="https://www.paypal.com/ncp/payment/CVSBVVWP6ZYGU" class="pay-btn">Join Workshop - $16</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Nilofer 3D SaaS</p>
+  </footer>
+
+  <script>
+    const balls = document.querySelectorAll('.ball');
+    const positions = Array.from({ length: balls.length }, () => ({ x: 0, y: 0 }));
+    let mouseX = 0, mouseY = 0;
+    let lastMouseMoveTime = 0;
+    let cursorVisible = false;
+
+    // Smooth movement using requestAnimationFrame
+    function animate() {
+        // Move the leading ball directly to the mouse position
+        positions[0].x += (mouseX - positions[0].x) * 0.15;
+        positions[0].y += (mouseY - positions[0].y) * 0.15;
+        balls[0].style.transform = `translate(${positions[0].x}px, ${positions[0].y}px) scale(1.2)`;
+
+        // Move the trailing balls with easing motion
+        for (let i = 1; i < balls.length; i++) {
+            positions[i].x += (positions[i - 1].x - positions[i].x) * 0.2; // Faster follow-up
+            positions[i].y += (positions[i - 1].y - positions[i].y) * 0.2;
+            balls[i].style.transform = `translate(${positions[i].x}px, ${positions[i].y}px) scale(1.1)`;
+        }
+
+        // Check for stopping and hiding cursor
+        if (Date.now() - lastMouseMoveTime > 500) {
+            hideCursor();
+        }
+
+        requestAnimationFrame(animate); // Keep the animation loop running smoothly
+    }
+
+    // Start the animation loop
+    animate();
+
+    // Mouse movement detection
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        lastMouseMoveTime = Date.now();
+
+        if (!cursorVisible) {
+            showCursor();
+        }
+    });
+
+    // Show the 3D cursor when the mouse moves
+    function showCursor() {
+        balls.forEach(ball => {
+            ball.style.opacity = '1'; // Fade-in effect
+        });
+        cursorVisible = true;
+    }
+
+    // Hide the cursor if there's no movement
+    function hideCursor() {
+        if (!cursorVisible) return;
+
+        balls.forEach((ball) => {
+            ball.style.opacity = '0'; // Smooth fade-out
+        });
+        cursorVisible = false;
+    }
+
+</script>
+</body>
+</html>
+
+
+
