@@ -1,217 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Cursor Workshop Learning</title>
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Science Day Special Form</title>
+    <style>
+        /* Body Styling */
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            overflow: hidden;
+        }
 
+        /* Form Container */
+        .futuristic-form {
+            background: rgba(30, 30, 40, 0.8);
+            border-radius: 65px;
+            box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.5);
+            padding: 60px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            display: none; /* Hidden initially */
+        }
 
-        #cursor-container {
-            position: absolute;
+        /* Title and Subtitle */
+        .futuristic-form h1 {
+            font-size: 24px;
+            color: #00e6e6;
+            margin-bottom: 5px;
+        }
+
+        .futuristic-form p {
+            color: #a8a8ff;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* Input Fields */
+        .futuristic-form input {
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+            font-size: 16px;
+        }
+
+        /* Skill Level Selector */
+        .skill-level {
+            display: flex;
+            justify-content: space-around;
+            margin: 15px 0;
+            align-items: center;
+        }
+
+        .skill-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .skill-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #888888;
+            margin-bottom: 5px;
+        }
+
+        .skill-dot.selected {
+            background: #46e3ff;
+        }
+
+        .skill-option-label {
+            color: #ffffff;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Submit Button */
+        .futuristic-form button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 24px;
+            border: none;
+            background: linear-gradient(45deg, #00e6e6, #ff00ff);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .futuristic-form button:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 0px 15px rgba(255, 0, 255, 0.5);
+        }
+
+        /* Pop-Up Overlay */
+        .overlay {
+            position: fixed;
             top: 0;
             left: 0;
-            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #ffffff;
+            font-size: 20px;
         }
 
-        .ball {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 0, 255, 1) 0%, rgba(255, 255, 255, 0) 70%);
-            box-shadow: 0px 0px 10px rgba(255, 0, 255, 0.7);
-            opacity: 0;
-            transition: opacity 0.2s ease-out;
+        .overlay h2 {
+            margin: 10px 0;
         }
 
-        #ball1 {
-            width: 24px;
-            height: 24px;
-            box-shadow: 0px 0px 15px rgba(255, 0, 255, 0.9);
+        .overlay button {
+            padding: 12px 20px;
+            background: linear-gradient(45deg, #00e6e6, #ff00ff);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-    body {
-      margin: 0;
-      background-color: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: center;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      width: 100%;
-      top: 0;
-    }
-
-    .navbar a {
-      color: #ff69b4;
-      margin: 0 20px;
-      text-decoration: none;
-      font-size: 18px;
-      transition: 0.3s;
-    }
-
-    /* 3D Slide Styling */
-    .slide {
-      width: 1154px;
-      height: 900px;
-      margin: 150px auto;
-      background: linear-gradient(145deg, #000000, #1a1a1a); /* Black gradient background */
-      border-radius: 40px;
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.5); /* White glowing corners */
-      transition: transform 0.5s ease, background 0.5s, box-shadow 0.5s ease;
-      perspective: 1000px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 2px solid rgba(255, 255, 255, 0.1); /* Subtle border for contrast */
-    }
-
-
-
-    .content {
-      text-align: center;
-      padding: 50px;
-      color: #fff;
-    }
-
-    .content h1 {
-      font-size: 48px;
-      font-weight: bold;
-      color: #ff69b4;
-      text-shadow: 0 0 10px #ff69b4;
-    }
-
-    .content p {
-      font-size: 22px;
-      color: rgba(255, 255, 255, 0.8);
-      max-width: 800px;
-      margin: 20px auto;
-    }
-
-    /* PayPal Button Styling */
-    .pay-btn {
-      display: inline-block;
-      padding: 15px 30px;
-      background-color: #ff69b4;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 30px;
-      box-shadow: 0 0 15px #ff69b4;
-      transition: 0.3s;
-      font-size: 18px;
-    }
-
-    .pay-btn:hover {
-      background-color: #ff1493;
-      box-shadow: 0 0 25px #ff69b4;
-    }
-
-    /* Footer Styling */
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-  </style>
+        .overlay button:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
-    <div id="cursor-container">
-        <div class="ball" id="ball1"></div>
-        <div class="ball" id="ball2"></div>
-        <div class="ball" id="ball3"></div>
-        <div class="ball" id="ball4"></div>
-        <div class="ball" id="ball5"></div>
-    </div>
 
-  <!-- 3D Slide for Workshop -->
-  <div class="slide">
-    <div class="content">
-      <h1>3D Cursor Workshop Learning</h1>
-      <p>Join our interactive 3D cursor workshop and learn to build cutting-edge web designs with mouse interactions and visual effects. Transform your projects with next-level skills.</p>
-      <a href="" class="pay-btn">Join Workshop - $16</a>
-    </div>
-  </div>
+    <!-- Background Music -->
+<audio id="backgroundMusic" loop>
+    <source src="AMAZING ROBOT DANCE GROUP  TECHNICIANZ.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2024 Nilofer 3D SaaS</p>
-  </footer>
+<!-- Pop-Up Overlay -->
+<div class="overlay" id="overlay">
+    <h2>Welcome to the Nilofer Spl's Workshop!</h2>
+    <p>Click below to enter the event and start your journey.</p>
+    <button onclick="enterEventAndRedirect()">Click Now to Enter</button>
+</div>
 
-  <script>
-    const balls = document.querySelectorAll('.ball');
-    const positions = Array.from({ length: balls.length }, () => ({ x: 0, y: 0 }));
-    let mouseX = 0, mouseY = 0;
-    let lastMouseMoveTime = 0;
-    let cursorVisible = false;
+<!-- 3D Form Container -->
+<div class="futuristic-form" id="futuristicForm" style="display: none;">
+    <h1>World Science Day Special</h1>
+    <p>Join Us in Shaping the Future of Science!</p>
 
-    // Smooth movement using requestAnimationFrame
-    function animate() {
-        // Move the leading ball directly to the mouse position
-        positions[0].x += (mouseX - positions[0].x) * 0.15;
-        positions[0].y += (mouseY - positions[0].y) * 0.15;
-        balls[0].style.transform = `translate(${positions[0].x}px, ${positions[0].y}px) scale(1.2)`;
+    <!-- Form Fields -->
+    <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <input type="text" placeholder="Your Current Role" required>
+        
+        <!-- Skill Level Selector -->
+        <label>Are you a:</label>
+        <div class="skill-level">
+            <div class="skill-option" data-level="Beginner" onclick="selectSkill(this)">
+                <div class="skill-dot"></div>
+                <div class="skill-option-label">Beginner</div>
+            </div>
+            <div class="skill-option" data-level="Pro" onclick="selectSkill(this)">
+                <div class="skill-dot"></div>
+                <div class="skill-option-label">Pro</div>
+            </div>
+            <div class="skill-option" data-level="Expert" onclick="selectSkill(this)">
+                <div class="skill-dot"></div>
+                <div class="skill-option-label">Expert</div>
+            </div>
+        </div>
 
-        // Move the trailing balls with easing motion
-        for (let i = 1; i < balls.length; i++) {
-            positions[i].x += (positions[i - 1].x - positions[i].x) * 0.2; // Faster follow-up
-            positions[i].y += (positions[i - 1].y - positions[i].y) * 0.2;
-            balls[i].style.transform = `translate(${positions[i].x}px, ${positions[i].y}px) scale(1.1)`;
-        }
+        <!-- Hidden Input to Store Selected Skill -->
+        <input type="hidden" id="selectedSkill" name="selectedSkill">
 
-        // Check for stopping and hiding cursor
-        if (Date.now() - lastMouseMoveTime > 500) {
-            hideCursor();
-        }
+        <!-- Submit Button -->
+        <button type="button" onclick="openSpinPage()">Click to Enter Spin</button>
+    </form>
+</div>
 
-        requestAnimationFrame(animate); // Keep the animation loop running smoothly
+<script>
+    // Select Skill Functionality
+    function selectSkill(element) {
+        const options = document.querySelectorAll('.skill-dot');
+        options.forEach(option => option.classList.remove('selected'));
+        element.querySelector('.skill-dot').classList.add('selected');
+        document.getElementById('selectedSkill').value = element.getAttribute('data-level');
     }
 
-    // Start the animation loop
-    animate();
-
-    // Mouse movement detection
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        lastMouseMoveTime = Date.now();
-
-        if (!cursorVisible) {
-            showCursor();
-        }
-    });
-
-    // Show the 3D cursor when the mouse moves
-    function showCursor() {
-        balls.forEach(ball => {
-            ball.style.opacity = '1'; // Fade-in effect
-        });
-        cursorVisible = true;
+    // Enter Event and Play Music, then Show Form
+    function enterEventAndRedirect() {
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('futuristicForm').style.display = 'block';
+        document.getElementById('backgroundMusic').play();
     }
 
-    // Hide the cursor if there's no movement
-    function hideCursor() {
-        if (!cursorVisible) return;
-
-        balls.forEach((ball) => {
-            ball.style.opacity = '0'; // Smooth fade-out
-        });
-        cursorVisible = false;
+    // Open Spin Page in a New Tab
+    function openSpinPage() {
+        window.open('spin.html', '_blank');
     }
-
 </script>
-</body>
-</html>
-
-
-

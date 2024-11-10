@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Ticket Purchase - Futuristic Carnival Theme</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #00f2ff, #ff0099);
+            animation: gradientShift 15s ease infinite;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Animation for background shift */
+        @keyframes gradientShift {
+            0% { background: linear-gradient(45deg, #00f2ff, #ff0099); }
+            50% { background: linear-gradient(45deg, #ff00d8, #00b5f1); }
+            100% { background: linear-gradient(45deg, #00f2ff, #ff0099); }
+        }
+        
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Glowing neon effect */
+        .neon-text {
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+        }
+        
+        .offer {
+            background: rgba(255, 0, 255, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px #fff;
+        }
+        
+        .ticket-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .ticket-info .details {
+            width: 60%;
+            position: relative;
+        }
+        
+        .ticket-info .photo {
+            width: 35%;
+            border: 5px solid #ff00ff;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        
+        .ticket-info .photo img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        .ticket-info .photo img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 1);
+        }
+
+        .cta-button {
+            display: block;
+            padding: 15px;
+            width: 100%;
+            background: #ff00ff;
+            color: #fff;
+            font-size: 20px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
+            transition: 0.3s ease;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            background: #ff1493;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 1);
+        }
+
+        select {
+            padding: 8px;
+            border: none;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.3);
+            color: #fff;
+            border-radius: 8px;
+            width: 100%;
+            margin-bottom: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        select:focus {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Styling for "Scan & Buy" text */
+        .scan-buy {
+            font-size: 22px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        /* Blinking animation for price and benefits */
+        @keyframes blinkExpand {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+
+        .discounted-price {
+            color: #ff0;
+            font-weight: bold;
+            animation: blinkExpand 1.5s ease infinite;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #ff8080;
+            animation: blinkExpand 2s ease infinite;
+        }
+
+        /* Benefits section styling */
+        .benefits {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border-radius: 30px;
+            padding: 3px;
+            margin-top: 15px;
+            font-size: 16px;
+            color: #fff;
+            animation: blinkExpand 1.5s ease infinite;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="neon-text">
+        Nilofer's Event 2024
+    </div>
+    
+    <div class="offer">
+        <p><strong>Special Offer:</strong> 70% Off on Pre-Tickets!</p>
+        <p>Original Price: <span class="original-price">499 Rs</span> | Discounted Price: <span class="discounted-price">149 Rs</span></p>
+    </div>
+    
+    <div class="ticket-info">
+        <div class="details">
+            <p><strong>No. of Tickets:</strong></p>
+            <select>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <p><strong>Total Amount:</strong> 149 Rs</p>
+            
+            <!-- Benefits Section -->
+            <div class="benefits">
+                <p><strong>Benefits of Attending:</strong></p>
+                <ul>
+                    <li>Access to exclusive books and resources</li><br>
+                    <li>Hands-on learning opportunities with experts</li><br>
+                    <li>Networking with like-minded individuals</li><br>
+                    <li>Memorable experiences to take home!</li><br>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="photo">
+            <!-- "Scan & Buy" text above the image -->
+            <div class="scan-buy">Scan & Buy</div>
+            <img src="WhatsApp Image 2024-11-10 at 11.22.06 AM.jpeg" alt="Event Photo">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

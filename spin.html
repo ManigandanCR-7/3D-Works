@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prize Wheel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #121212;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    #wheel-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    #wheel {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(
+        #ff7f7f 0deg 60deg, 
+        #ffbf7f 60deg 120deg, 
+        #7fff7f 120deg 180deg, 
+        #7f7fff 180deg 240deg, 
+        #ff7fff 240deg 300deg, 
+        #ffff7f 300deg 360deg
+      );
+      position: absolute;
+      transition: transform 4s ease-out;
+      box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.2), 0 0 15px 5px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Prize text styling */
+    .prize-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-origin: 50% 50%;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .prize-text:hover {
+      transform: translate(-50%, -50%) scale(1.2);
+      color: #ff7f7f;
+    }
+
+    /* Spin Button Styling */
+    .spin-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ff7f7f;
+      color: white;
+      font-size: 16px;
+      padding: 15px 30px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      box-shadow: 0 0 20px rgba(255, 127, 127, 0.8);
+      transition: all 0.3s ease;
+    }
+
+    .spin-button:hover {
+      background-color: #ff5555;
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 0 25px rgba(255, 85, 85, 0.8);
+    }
+
+    /* Overlay Styling */
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.8); 
+      display: none;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+      backdrop-filter: blur(10px);  
+      -webkit-backdrop-filter: blur(10px); 
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .overlay-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .overlay-title {
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      color: #ff7f7f;
+    }
+
+    .overlay-subtitle {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #ffbf7f;
+    }
+
+    .overlay-prize {
+      font-size: 24px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #7fff7f;
+      animation: prizeHighlight 1s ease-in-out infinite alternate;
+    }
+
+    .overlay-discount {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #ffff7f;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .timer {
+      font-size: 18px;
+      margin-bottom: 20px;
+      font-family: 'Courier New', Courier, monospace;
+      letter-spacing: 2px;
+      color: #ff7fff;
+      text-shadow: 0 0 15px rgba(255, 127, 255, 0.8);
+    }
+
+    .buy-ticket-button {
+      padding: 12px 24px;
+      background-color: #ff7f7f;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .buy-ticket-button:hover {
+      background-color: #ff5555;
+      transform: scale(1.1);
+    }
+
+    /* Animations */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes prizeHighlight {
+      0% {
+        color: #7fff7f;
+        transform: scale(1);
+      }
+      100% {
+        color: #ff7f7f;
+        transform: scale(1.2);
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div id="wheel-container">
+    <div id="wheel">
+      <!-- Prize text placed on each section around the wheel -->
+      <div class="prize-text" style="transform: translate(-50%, -50%) rotate(40deg) translateY(-130px)">Prize 1</div>
+      <div class="prize-text" style="transform: translate(-50%, -50%) rotate(80deg) translateY(-130px)">Prize 2</div>
+      <div class="prize-text" style="transform: translate(-50%, -50%) rotate(140deg) translateY(-130px)">Prize 3</div>
+      <div class="prize-text" style="transform: translate(-50%, -50%) rotate(210deg) translateY(-130px)">Prize 4</div>
+      <div class="prize-text" style="transform: translate(-50%, -50%) rotate(270deg) translateY(-130px)">Prize 5</div>
+      <div class="prize-text" style="transform: translate(-50%, -50%) rotate(330deg) translateY(-130px)">Prize 6</div>
+    </div>
+    <button class="spin-button" id="spinButton">Spin the Wheel!</button>
+  </div>
+
+  <!-- Overlay -->
+  <div id="overlay">
+    <div class="overlay-content">
+      <div class="overlay-title">Congratulations!</div>
+      <div class="overlay-subtitle">You’ve won:</div>
+      <div class="overlay-prize" id="prizeName">Prize 3</div>
+      <div class="overlay-discount" id="discountText">70 off on Event ticket</div>
+      <div class="timer" id="timer">Time left: 5:00</div>
+      <button class="buy-ticket-button" onclick="window.location.href='ticketpage.html'">Buy Ticket</button>
+    </div>
+  </div>
+
+  <script>
+    const spinButton = document.getElementById("spinButton");
+    const wheel = document.getElementById("wheel");
+    const overlay = document.getElementById("overlay");
+    const prizeName = document.getElementById("prizeName");
+    const discountText = document.getElementById("discountText");
+    const timerElement = document.getElementById("timer");
+
+    let rotation = 0;
+    let timeLeft = 300; // 5 minutes
+    let countdownInterval;
+
+    function spinWheel() {
+      const randomDegree = Math.floor(Math.random() * 360 + 1800); // Spin 5 times (1800 + random degree)
+      wheel.style.transform = `rotate(${rotation + randomDegree}deg)`;
+      rotation += randomDegree;
+
+      // Show overlay after spin
+      setTimeout(() => {
+        overlay.style.display = "flex";
+        clearInterval(countdownInterval);
+        countdownInterval = setInterval(updateTimer, 1000);
+      }, 4000); // wait for the wheel to stop spinning
+    }
+
+    function updateTimer() {
+      timeLeft--;
+      let minutes = Math.floor(timeLeft / 60);
+      let seconds = timeLeft % 60;
+      timerElement.textContent = `Time left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      if (timeLeft <= 0) {
+        clearInterval(countdownInterval);
+        alert('Time is up!');
+      }
+    }
+
+    spinButton.addEventListener("click", spinWheel);
+  </script>
+</body>
+</html>
