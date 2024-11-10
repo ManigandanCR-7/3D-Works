@@ -17,6 +17,58 @@
       overflow: hidden;
     }
 
+    
+    .price-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 80%;
+      max-width: 180px;
+    }
+
+    .price-box {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transform: translateX(70px); /* Adjust the value for desired position */
+}
+
+
+    .price-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    .price-box .price {
+      font-size: 24px;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+      margin-bottom: 6px;
+    }
+
+    .price-box .discount {
+      font-size: 16px;
+      font-weight: 400;
+      color: #ff2e63;
+      text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+    }
+
+    .price-box span {
+      display: block;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 6px;
+    }
+
+    .price-box span strong {
+      color: #fff;
+    }
+    
     #wheel-container {
       position: relative;
       width: 300px;
@@ -213,6 +265,35 @@
     </div>
     <button class="spin-button" id="spinButton">Spin the Wheel!</button>
   </div>
+
+  <div class="price-container">
+    <div class="price-box">
+      <div class="price">Price 1</div>
+      <div class="discount">Free Ticket</div>
+      <span><strong>Off:</strong> 0%</span>
+    </div>
+    <div class="price-box">
+      <div class="price">Price 2</div>
+      <div class="discount">80% Off</div>
+      <span><strong>Off:</strong> 80%</span>
+    </div>
+    <div class="price-box">
+      <div class="price">Price 3</div>
+      <div class="discount">70% Off</div>
+      <span><strong>Off:</strong> 70%</span>
+    </div>
+    <div class="price-box">
+      <div class="price">Price 4</div>
+      <div class="discount">60% Off</div>
+      <span><strong>Off:</strong> 60%</span>
+    </div>
+    <div class="price-box">
+      <div class="price">Price 5</div>
+      <div class="discount">50% Off</div>
+      <span><strong>Off:</strong> 50%</span>
+    </div>
+  </div>
+
 
   <!-- Overlay -->
   <div id="overlay">
