@@ -38,7 +38,7 @@
 <body>
 
     <div class="video-container">
-        <video id="my-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="360">
+        <video id="my-video" class="video-js vjs-default-skin" controls preload="auto" autoplay width="640" height="360">
             <!-- The RTMP stream source URL -->
             <source src="rtmp://192.168.43.144:1935/live/yourStreamKey" type="rtmp/mp4">
         </video>
@@ -51,6 +51,11 @@
             flash: {
                 swf: "https://cdn.jsdelivr.net/npm/videojs-flash/dist/videojs-flash.swf"  // Flash SWF file
             }
+        });
+
+        // Ensure the player starts playing automatically
+        player.ready(function() {
+            player.play();
         });
     </script>
 
